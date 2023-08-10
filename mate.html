@@ -247,17 +247,18 @@
   <a href="./libre.html"> <button> Hecha un vistazo </button> </a>
 </div>
 <script>
- function leerTexto(texto) {
-            if ('speechSynthesis' in window) {
-                const mensaje = new SpeechSynthesisUtterance(texto);
-                const voces = window.speechSynthesis.getVoices();
-                const vozFemenina = voces.find(voice => voice.name === 'Google UK English Female');
-                mensaje.voice = vozFemenina || voces[0];
-                window.speechSynthesis.speak(mensaje);
-            } else {
-                alert('Lo siento, el sintetizador de voz no es compatible con este navegador.');
-            }
-        }
+function leerTexto(texto) {
+    if ('speechSynthesis' in window) {
+        const mensaje = new SpeechSynthesisUtterance(texto);
+        const voces = window.speechSynthesis.getVoices();
+        const vozFemenina = voces.find(voice => voice.name === 'Google español de Estados Unidos');
+        mensaje.voice = vozFemenina || voces[0];
+        window.speechSynthesis.speak(mensaje);
+    } else {
+        alert('Lo siento, el sintetizador de voz no es compatible con este navegador.');
+    }
+}
+
 </script>
 </body>
 </html>
