@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resuelve Math</title>
+<style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #e0f5cc;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .container {
+      text-align: center;
+      background-color: #ffffff;
+      border-radius: 15px;
+      box-shadow: 0 3px 6px rgba(44, 249, 3, 0.1);
+      padding: 30px;
+      width: 80%;
+      max-width: 800px;
+    }
+    h1 {
+      color: #555;
+    }
+    h2 {
+      color: #2ca906;
+    }
+    .activity {
+      border: 2px solid #919593;
+      padding: 20px;
+      margin: 20px 0;
+      background-color: #fff;
+      border-radius: 10px;
+    }
+    button {
+      background-color: #66b3e6;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #338acc;
+    }
+    .resultado {
+      margin-top: 10px;
+      font-weight: bold;
+      font-size: 18px;
+    }
+    .correcto {
+      color: #5cb85c;
+    }
+    .incorrecto {
+      color: #d9534f;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>Resuelve Math</h1>
+  <p> Resuelve los siguientes ejercicios, pruebate y aprende </p>
+  
+  <div class="activity">
+    <h2>Medición de Figuras Geométricas</h2> 
+    <button class="audio-button" onclick="leerTexto('Para sacar la Área, el perimetro del cuadrado y rectangulo o sacar la circunferencia del circulo proporciona los siguentes datos que se te pide')">Leer Instrucciones</button>
+<div class="activity">
+    <h3>Medición de Figuras Geométricas</h3>
+    <p>Selecciona una figura geométrica y mide su longitud, ancho o radio:</p>
+    
+    <label for="figura">Selecciona una figura:</label>
+    <select id="figura">
+      <option value="cuadrado">Cuadrado </option>
+      <option value="rectangulo">Rectángulo</option>
+      <option value="circulo">Círculo</option>
+    </select>
+    
+    <div id="resultado"></div>
+  </div>
+  
+  <script>
+    const figuraSelect = document.getElementById('figura');
+    const resultadoDiv = document.getElementById('resultado');
+    
+    figuraSelect.addEventListener('change', calcularMedidas);
+    
+    function calcularMedidas() {
+      const figuraSeleccionada = figuraSelect.value;
+      resultadoDiv.innerHTML = '';
+      
+      if (figuraSeleccionada === 'cuadrado') {
+        const lado = parseFloat(prompt('Ingresa la longitud del lado del cuadrado:'));
+        const area = lado * lado;
+        const perimetro = lado * 4;
+        
+        resultadoDiv.innerHTML = `
+          <p>Área del cuadrado: ${area}</p>
+          <p>Perímetro del cuadrado: ${perimetro}</p>
+        `;
+      } else if (figuraSeleccionada === 'rectangulo') {
+        const longitud = parseFloat(prompt('Ingresa la longitud del rectángulo:'));
+        const ancho = parseFloat(prompt('Ingresa el ancho del rectángulo:'));
+        const area = longitud * ancho;
+        const perimetro = 2 * (longitud + ancho);
+        
+        resultadoDiv.innerHTML = `
+          <p>Área del rectángulo: ${area}</p>
+          <p>Perímetro del rectángulo: ${perimetro}</p>
+        `;
+      } else if (figuraSeleccionada === 'circulo') {
+        const radio = parseFloat(prompt('Ingresa el radio del círculo:'));
+        const area = Math.PI * radio ** 2;
+        const circunferencia = 2 * Math.PI * radio;
+        
+        resultadoDiv.innerHTML = `
+          <p>Área del círculo: ${area}</p>
+          <p>Circunferencia del círculo: ${circunferencia}</p>
+        `;
+      }
+    }
+  </script>
+  
+  </div>
+  
+  <div class="activity">
+    <h2>Sumas y Restas</h2>
+    <button class="audio-button" onclick="leerTexto('Resuelve los siguientes problemas matematicos, verifica tus respuestas y genera los siguientesproblemas')">Leer Instrucciones</button>
+<!-- Dentro del div con la clase "activity" de sumas y restas -->
+<div class="activity">
+    <h2>Sumas y Restas</h2>
+    <p>Resuelve los siguientes problemas de sumas y restas:</p>
+    
+    <div id="suma-resta-questions"></div>
+    <button id="generar-problemas">Generar Problemas</button>
+  </div>
+  
+  <script>
+    const sumaRestaDiv = document.getElementById('suma-resta-questions');
+    const generarProblemasBtn = document.getElementById('generar-problemas');
+    
+    generarProblemasBtn.addEventListener('click', generarProblemas);
+    
+    function generarProblemas() {
+      sumaRestaDiv.innerHTML = '';
+      
+      for (let i = 1; i <= 5; i++) {
+        const num1 = Math.floor(Math.random() * 100);
+        const num2 = Math.floor(Math.random() * 100);
+        const operacion = Math.random() < 0.5 ? '+' : '-';
+        const respuesta = operacion === '+' ? num1 + num2 : num1 - num2;
+        
+        const pregunta = document.createElement('p');
+        pregunta.textContent = `${num1} ${operacion} ${num2} = `;
+        
+        const inputRespuesta = document.createElement('input');
+        inputRespuesta.type = 'number';
+        
+        const verificarBtn = document.createElement('button');
+        verificarBtn.textContent = 'Verificar';
+        verificarBtn.addEventListener('click', () => verificarRespuesta(respuesta, inputRespuesta.value));
+        
+        sumaRestaDiv.appendChild(pregunta);
+        sumaRestaDiv.appendChild(inputRespuesta);
+        sumaRestaDiv.appendChild(verificarBtn);
+      }
+    }
+    
+    function verificarRespuesta(respuestaCorrecta, respuestaUsuario) {
+      const resultado = document.createElement('p');
+      resultado.textContent = respuestaCorrecta == respuestaUsuario
+        ? '¡Correcto!'
+        : 'Respuesta incorrecta';
+      resultado.classList.add('resultado');
+      
+      sumaRestaDiv.appendChild(resultado);
+    }
+  </script>
+  </div>  
+  
+  <div class="activity">
+    <h2>Multiplicaciones y Divisiones</h2>
+    <button class="audio-button" onclick="leerTexto('Resuelve los siguientes problemas matematicos, verifica tus respuestas y genera los siguientesproblemas')">Leer Instrucciones</button>
+<div class="activity">
+    <h3>Multiplicaciones y Divisiones</h3>
+    <p>Resuelve los siguientes problemas de multiplicaciones y divisiones:</p>
+    
+    <div id="multi-divi-questions"></div>
+    <button id="generar-problemas-multi-divi">Generar Problemas</button>
+  </div>
+  
+  <script>
+    const multiDiviDiv = document.getElementById('multi-divi-questions');
+    const generarProblemasMultiDiviBtn = document.getElementById('generar-problemas-multi-divi');
+    
+    generarProblemasMultiDiviBtn.addEventListener('click', generarProblemasMultiDivi);
+    
+    function generarProblemasMultiDivi() {
+      multiDiviDiv.innerHTML = '';
+      
+      for (let i = 1; i <= 5; i++) {
+        const num1 = Math.floor(Math.random() * 12) + 1; // Números del 1 al 12
+        const num2 = Math.floor(Math.random() * 12) + 1;
+        const operacion = Math.random() < 0.5 ? 'x' : '/';
+        
+        let pregunta;
+        if (operacion === 'x') {
+          pregunta = document.createElement('p');
+          pregunta.textContent = `${num1} ${operacion} ${num2} = `;
+        } else {
+          const producto = num1 * num2;
+          pregunta = document.createElement('p');
+          pregunta.textContent = `${producto} ${operacion} ${num1} = `;
+        }
+        
+        const inputRespuesta = document.createElement('input');
+        inputRespuesta.type = 'number';
+        
+        const verificarBtn = document.createElement('button');
+        verificarBtn.textContent = 'Verificar';
+        verificarBtn.addEventListener('click', () => verificarRespuestaMultiDivi(operacion, num1, num2, inputRespuesta.value));
+        
+        multiDiviDiv.appendChild(pregunta);
+        multiDiviDiv.appendChild(inputRespuesta);
+        multiDiviDiv.appendChild(verificarBtn);
+      }
+    }
+    
+    function verificarRespuestaMultiDivi(operacion, num1, num2, respuestaUsuario) {
+      const respuestaCorrecta = operacion === 'x' ? num1 * num2 : num2;
+      const resultado = document.createElement('p');
+      resultado.textContent = respuestaCorrecta == respuestaUsuario
+        ? '¡Correcto!'
+        : 'Respuesta incorrecta';
+      resultado.classList.add('resultado');
+      
+      multiDiviDiv.appendChild(resultado);
+    }
+  </script>
+  
+  </div>
+  <a href="./index.html"> <button> Sobre mi</button> </a>
+  <a href="./libre.html"> <button> Hecha un vistazo </button> </a>
+</div>
+<script>
+ function leerTexto(texto) {
+            if ('speechSynthesis' in window) {
+                const mensaje = new SpeechSynthesisUtterance(texto);
+                const voces = window.speechSynthesis.getVoices();
+                const vozFemenina = voces.find(voice => voice.name === 'Google UK English Female');
+                mensaje.voice = vozFemenina || voces[0];
+                window.speechSynthesis.speak(mensaje);
+            } else {
+                alert('Lo siento, el sintetizador de voz no es compatible con este navegador.');
+            }
+        }
+</script>
+</body>
+</html>
+
+
